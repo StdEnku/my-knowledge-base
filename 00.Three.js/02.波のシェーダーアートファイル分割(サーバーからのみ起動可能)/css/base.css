@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  overflow: hidden; /* スクロールバー削除 */
+  background-color: #030408; /* 極めて暗い、ほぼ黒のミッドナイトブルー */
+}
+
+/* canvas要素自体のスタイルを明示的に指定 */
+#myCanvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}

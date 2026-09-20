@@ -1,27 +1,53 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
+  <!-- #region head -->
   <meta charset="UTF-8">
   <title>Elegant Ambient Waves</title>
+
   <style>
     body {
       margin: 0;
-      overflow: hidden;
+      overflow: hidden; /* スクロールバー削除 */
       background-color: #030408; /* 極めて暗い、ほぼ黒のミッドナイトブルー */
     }
-    canvas {
+
+    /* canvas要素自体のスタイルを明示的に指定 */
+    #myCanvas {
       display: block;
+      width: 100vw;
+      height: 100vh;
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- #endregion -->
 </head>
+
 <body>
-  <script>
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  <!-- #region body -->
+  
+  <!-- 明示的にcanvas要素を配置 -->
+  <canvas id="myCanvas"></canvas>
+
+  <!-- ESモジュールとしてTHREEを明示的にインポート -->
+  <script type="module">
+    import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
+
+    const scene = new THREE.Scene(); // シーンオブジェクト
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1); // カメラオブジェクト
+    
+    // HTML上のcanvas要素を取得
+    const canvas = document.getElementById('myCanvas');
+    
+    // 取得したcanvasをレンダラーに渡す
+    const renderer = new THREE.WebGLRenderer({ 
+      canvas: canvas, 
+      antialias: true, 
+      alpha: true 
+    }); 
+    
     renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+    renderer.setPixelRatio(window.devicePixelRatio); // 高解像度ディスプレイ（Retina等）対応
 
     const uniforms = {
       u_time: { value: 0.0 },
@@ -116,5 +142,6 @@
       uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
     });
   </script>
+  <!-- #endregion -->
 </body>
 </html>

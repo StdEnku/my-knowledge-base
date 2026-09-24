@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Design Preview</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- Header -->
+        <header class="header">
+            <span class="badge">CSS PREVIEW</span>
+
+            <h1>Beautiful Interface</h1>
+
+            <p>
+                HTMLとCSSだけで構成されたデザイン確認用ページです。
+            </p>
+        </header>
+
+
+        <!-- Cards -->
+        <main>
+
+            <div class="grid">
+
+                <section class="card">
+
+                    <span class="badge">CARD</span>
+
+                    <h2>Elegant Card</h2>
+
+                    <p>
+                        半透明の背景、ぼかし、柔らかな影を組み合わせた
+                        モダンなカードデザインです。
+                    </p>
+
+                    <button class="btn">
+                        Primary Button
+                    </button>
+
+                </section>
+
+
+                <section class="card">
+
+                    <h2>Form</h2>
+
+                    <p>
+                        フォームも同じデザインに統一できます。
+                    </p>
+
+                    <input
+                        class="input"
+                        type="text"
+                        placeholder="名前を入力してください"
+                    >
+
+                    <div class="divider"></div>
+
+                    <button class="btn btn-secondary">
+                        Secondary Button
+                    </button>
+
+                </section>
+
+
+                <section class="card">
+
+                    <span class="badge">ABOUT</span>
+
+                    <h2>Design System</h2>
+
+                    <p>
+                        色、余白、角丸、影などを統一することで、
+                        ページ全体に一貫した雰囲気を持たせています。
+                    </p>
+
+                    <a href="#">
+                        Learn more →
+                    </a>
+
+                </section>
+
+            </div>
+
+
+            <!-- Large Card -->
+            <section class="card" style="margin-top: 20px;">
+
+                <span class="badge">PREVIEW</span>
+
+                <h2>Everything Together</h2>
+
+                <p>
+                    カード、ボタン、フォーム、リンク、バッジなどを
+                    一つのページにまとめています。
+                </p>
+
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+
+                    <button class="btn">
+                        Get Started
+                    </button>
+
+                    <button class="btn btn-secondary">
+                        Learn More
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- Footer -->
+        <footer class="footer">
+            CSS Design Preview · HTML / CSS
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

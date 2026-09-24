@@ -1,0 +1,411 @@
+   /*
+    * CC0 1.0 Universal
+    *
+    * To the extent possible under law, the author has waived
+    * all copyright and related rights to this work.
+    *
+    * https://creativecommons.org/publicdomain/zero/1.0/
+    */
+
+/* =========================================================
+   Modern UI
+   ========================================================= */
+
+:root {
+    --bg: #0b0d12; /* 基底背景色 */
+    --surface: #161922c7; /* カードなどの背景色 */
+    --surface-hover: #1e222edc; /* カードなどのホバー時の背景色 */
+
+    --text: #f4f6fb; /* テキストの色 */
+    --text-muted: #9aa3b5; /* 非活性化時の文字色 */
+
+    --primary: #7c5cff; /* 目立たせたい主要パーツ */
+    --primary-hover: #9278ff; /*目立たせたい主要パーツのホバー時の色*/
+
+    --border: #ffffff17; /*枠の色*/
+
+    --shadow: 0 20px 50px #00000059;
+
+    --radius: 18px;
+}
+
+
+/* =========================================================
+   Reset
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Roboto,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+    color: var(--text);
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(124, 92, 255, 0.15),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(0, 200, 255, 0.08),
+            transparent 30%
+        ),
+        var(--bg);
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   App Layout(body内のすべての見た目)
+   ========================================================= */
+
+.app {
+    width: min(1100px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 60px 0;
+}
+
+
+/* =========================================================
+   Header(ヘッダー)
+   ========================================================= */
+
+.header {
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    margin: 0;
+
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 750;
+    letter-spacing: -0.04em;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #aaa0ff
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.header p {
+    margin: 10px 0 0;
+
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+
+/* =========================================================
+   Card
+   ========================================================= */
+
+.card {
+    position: relative;
+
+    padding: 30px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    background: var(--surface);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow: var(--shadow);
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+
+    background: var(--surface-hover);
+
+    border-color:
+        rgba(255, 255, 255, 0.14);
+}
+
+
+/* =========================================================
+   Card Title
+   ========================================================= */
+
+.card h2 {
+    margin: 0 0 10px;
+
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+}
+
+.card p {
+    color: var(--text-muted);
+}
+
+
+/* =========================================================
+   Button
+   ========================================================= */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 46px;
+    padding: 0 20px;
+
+    border: 0;
+    border-radius: 12px;
+
+    color: white;
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            #5b42d6
+        );
+
+    font: inherit;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px rgba(124, 92, 255, 0.25);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.08);
+
+    box-shadow:
+        0 12px 30px rgba(124, 92, 255, 0.35);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:focus-visible {
+    outline: 2px solid #aaa0ff;
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   Secondary Button
+   ========================================================= */
+
+.btn-secondary {
+    color: var(--text);
+
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    border: 1px solid var(--border);
+
+    box-shadow: none;
+}
+
+.btn-secondary:hover {
+    background:
+        rgba(255, 255, 255, 0.1);
+}
+
+
+/* =========================================================
+   Input
+   ========================================================= */
+
+.input {
+    width: 100%;
+    min-height: 46px;
+
+    padding: 0 15px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 11px;
+
+    outline: none;
+
+    color: var(--text);
+    background:
+        rgba(255, 255, 255, 0.045);
+
+    font: inherit;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.input::placeholder {
+    color: #687184;
+}
+
+.input:hover {
+    background:
+        rgba(255, 255, 255, 0.06);
+}
+
+.input:focus {
+    border-color:
+        rgba(124, 92, 255, 0.8);
+
+    background:
+        rgba(255, 255, 255, 0.07);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(124, 92, 255, 0.12);
+}
+
+
+/* =========================================================
+   Grid
+   ========================================================= */
+
+.grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(240px, 1fr));
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   Badge
+   ========================================================= */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 5px 10px;
+
+    border: 1px solid
+        rgba(124, 92, 255, 0.25);
+
+    border-radius: 999px;
+
+    color: #bcb0ff;
+
+    background:
+        rgba(124, 92, 255, 0.1);
+
+    font-size: 0.8rem;
+    font-weight: 650;
+}
+
+
+/* =========================================================
+   Divider
+   ========================================================= */
+
+.divider {
+    height: 1px;
+    margin: 25px 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,0.12),
+            transparent
+        );
+}
+
+
+/* =========================================================
+   Link
+   ========================================================= */
+
+a {
+    color: #a99cff;
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease;
+}
+
+a:hover {
+    color: #c2baff;
+}
+
+
+/* =========================================================
+   Footer
+   ========================================================= */
+
+.footer {
+    margin-top: 60px;
+
+    text-align: center;
+
+    color: #687184;
+    font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .app {
+        width: min(
+            100% - 24px,
+            1100px
+        );
+
+        padding: 30px 0;
+    }
+
+    .card {
+        padding: 22px;
+        border-radius: 15px;
+    }
+
+    .header {
+        margin-bottom: 28px;
+    }
+}

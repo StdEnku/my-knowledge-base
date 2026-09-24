@@ -5,7 +5,7 @@ if (!gl) {
   alert('WebGLがサポートされていません');
 }
 
-const programId = createWaveEffectProgramI();// 別エフェクトに切り替えたいならこの関数を変更する
+const programId = GetWaveEffectProgram();// 別エフェクトに切り替えたいならこの関数を変更する
 
 // ==========================================
 // ポリゴンの頂点データを設定 (画面全体を覆う四角形)

@@ -2,7 +2,7 @@
   波のようなシェーダーエフェクトのシェーダーをコンパイルして
   リンクしたプログラムオブジェクトのIDを返す関数
 */
-function createWaveEffectProgram() {
+function GetWaveEffectProgram() {
     // 頂点シェーダー (Three.jsが自動付与する uv や position を手動で定義)
     const vertexShaderSource = `
       attribute vec2 a_position;

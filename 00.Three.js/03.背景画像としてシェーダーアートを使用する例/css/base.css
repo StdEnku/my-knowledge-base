@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: #030408;
+}
+
+.content {
+  position: absolute;
+}
+
+.content.background {
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.content.front {
+  z-index: 1;
+  color: #FFFFFF;
+  font-size: 100px;
+}

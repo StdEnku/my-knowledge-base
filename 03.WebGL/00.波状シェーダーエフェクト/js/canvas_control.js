@@ -7,36 +7,33 @@ if (!gl) {
 
 const programId = GetWaveEffectProgram();// 別エフェクトに切り替えたいならこの関数を変更する
 
-// ==========================================
-// ポリゴンの頂点データを設定 (画面全体を覆う四角形)
-// ==========================================
-const positionBuffer = gl.createBuffer();
-gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+const positionBufferId = gl.createBuffer();// vbo作成してvboのIDを返す。
+gl.bindBuffer(gl.ARRAY_BUFFER, positionBufferId);// 先ほど作成したvboを操作対象にする。
 
-// Triangle Strip用の4頂点 (-1.0から1.0の正規化デバイス座標系)
+// ローカル空間最大の四角面
 const positions = new Float32Array([
   -1.0, -1.0,
   1.0, -1.0,
   -1.0, 1.0,
   1.0, 1.0,
 ]);
-gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
 
-// プログラムの有効化
-gl.useProgram(programId);
+gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);// vboに頂点情報を流し込む
+
+gl.useProgram(programId);// プログラムの有効化
 
 // 属性(attribute)と変数(uniform)のロケーションを取得
-const positionLocation = gl.getAttribLocation(programId, "a_position");
-const uTimeLocation = gl.getUniformLocation(programId, "u_time");
-const uResolutionLocation = gl.getUniformLocation(programId, "u_resolution");
+const a_positionVarID = gl.getAttribLocation(programId, "a_position");// シェーダーに渡す頂点のポジションId
+const u_timeVarID = gl.getUniformLocation(programId, "u_time");// シェーダーに渡すuniform変数のポジションId
+const u_resolutionVarID = gl.getUniformLocation(programId, "u_resolution");// シェーダーに渡すuniform変数のポジションId
 
-// 頂点データの紐付け
-gl.enableVertexAttribArray(positionLocation);
-gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
 
-// ==========================================
-// リサイズ処理 (高解像度対応)
-// ==========================================
+gl.enableVertexAttribArray(a_positionVarID);// このシェーダー変数を頂点送信用に指定
+gl.vertexAttribPointer(a_positionVarID, 2, gl.FLOAT, false, 0, 0);// 具体的な頂点データの並び方設定
+
+/* 
+  画面リサイズ時canvasのサイズも動的に変更する関数
+*/
 function resizeCanvas() {
   const pixelRatio = window.devicePixelRatio || 1;
   const width = window.innerWidth * pixelRatio;
@@ -50,21 +47,21 @@ function resizeCanvas() {
   canvas.style.height = window.innerHeight + 'px';
 
   gl.viewport(0, 0, canvas.width, canvas.height);
-  gl.uniform2f(uResolutionLocation, canvas.width, canvas.height);
+  gl.uniform2f(u_resolutionVarID, canvas.width, canvas.height);
 }
 
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas(); // 初期化時に一度実行
 
-// ==========================================
-// アニメーションループ
-// ==========================================
+/* 
+  アニメーション用ループ
+*/
 function animate(time) {
   // 経過時間を秒単位に変換
   const timeInSeconds = time * 0.001;
 
   // Uniform変数の更新
-  gl.uniform1f(uTimeLocation, timeInSeconds);
+  gl.uniform1f(u_timeVarID, timeInSeconds);
 
   // 描画
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);

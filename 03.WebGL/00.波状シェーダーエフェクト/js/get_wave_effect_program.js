@@ -1,12 +1,13 @@
 /*
   波のようなシェーダーエフェクトのシェーダーをコンパイルして
   リンクしたプログラムオブジェクトのIDを返す関数
+  (WebGL2 / GLSL 3.00 es 対応版)
 */
 function GetWaveEffectProgram() {
-    // 頂点シェーダー (Three.jsが自動付与する uv や position を手動で定義)
-    const vertexShaderSource = `
-      attribute vec2 a_position;
-      varying vec2 vUv;
+    // 頂点シェーダー (GLSL 3.00 es)
+    const vertexShaderSource = `#version 300 es
+      in vec2 a_position;
+      out vec2 vUv;
       void main() {
         // -1.0 ~ 1.0 の座標を 0.0 ~ 1.0 の UV座標に変換
         vUv = a_position * 0.5 + 0.5;
@@ -14,13 +15,15 @@ function GetWaveEffectProgram() {
       }
     `;
 
-    // フラグメントシェーダー (precisionを明示的に追加)
-    const fragmentShaderSource = `
+    // フラグメントシェーダー (GLSL 3.00 es)
+    const fragmentShaderSource = `#version 300 es
       precision mediump float;
       
       uniform float u_time;
       uniform vec2 u_resolution;
-      varying vec2 vUv;
+      in vec2 vUv;
+
+      out vec4 outColor; // gl_FragColorの代わりに出力変数を定義
 
       void main() {
         vec2 uv = vUv - 0.5;
@@ -55,7 +58,7 @@ function GetWaveEffectProgram() {
           finalColor += waveColor * intensity;
         }
 
-        gl_FragColor = vec4(finalColor, 1.0);
+        outColor = vec4(finalColor, 1.0); // 定義した変数に出力
       }
     `;
 
@@ -69,4 +72,3 @@ function GetWaveEffectProgram() {
     const programId = createProgram(gl, vertexShaderId, fragmentShaderId);
     return programId;
 }
-

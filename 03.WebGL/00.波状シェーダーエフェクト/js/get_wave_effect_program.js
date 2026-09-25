@@ -1,10 +1,8 @@
 /*
   波のようなシェーダーエフェクトのシェーダーをコンパイルして
   リンクしたプログラムオブジェクトのIDを返す関数
-  (WebGL2 / GLSL 3.00 es 対応版)
 */
 function GetWaveEffectProgram() {
-    // 頂点シェーダー (GLSL 3.00 es)
     const vertexShaderSource = `#version 300 es
       in vec2 a_position;
       out vec2 vUv;
@@ -15,7 +13,6 @@ function GetWaveEffectProgram() {
       }
     `;
 
-    // フラグメントシェーダー (GLSL 3.00 es)
     const fragmentShaderSource = `#version 300 es
       precision mediump float;
       
@@ -62,13 +59,8 @@ function GetWaveEffectProgram() {
       }
     `;
 
-    // 頂点シェーダーコンパイル
-    const vertexShaderId = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
-
-    // フラグメントシェーダーコンパイル
-    const fragmentShaderId = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
-
-    // リンクしてGPUで動かせるプログラムオブジェクトの作成
-    const programId = createProgram(gl, vertexShaderId, fragmentShaderId);
+    const vertexShaderId = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);// 頂点シェーダーコンパイル
+    const fragmentShaderId = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);// フラグメントシェーダーコンパイル
+    const programId = createProgram(gl, vertexShaderId, fragmentShaderId);// リンクしてGPUで動かせるプログラムオブジェクトの作成
     return programId;
 }

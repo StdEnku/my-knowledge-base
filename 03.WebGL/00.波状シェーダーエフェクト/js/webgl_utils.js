@@ -1,9 +1,9 @@
-/*------------------------------------------------------------------
+/*
   [シェーダーのコンパイル]
   gl - WebGlのコンテキスト
   type - シェーダーの種類 (gl.VERTEX_SHADER or gl.FRAGMENT_SHADER)
   source - シェーダーのソースコードの文字列
---------------------------------------------------------------------*/
+*/
 function createShader(gl, type, source) {
     const shaderId = gl.createShader(type);// 空のシェーダーオブジェクトのID
 
@@ -23,12 +23,12 @@ function createShader(gl, type, source) {
     return shaderId;// コンパイルに成功したシェーダーオブジェクトのIDを返す
 }
 
-/*----------------------------------------------------------------------------------
+/*
   [コンパイル済みシェーダーをリンクしてGPU上で実行するプログラムオブジェクトを作成する]
   gl - WebGlのコンテキスト
   vertexShaderId - 頂点シェーダーのオブジェクトID
   fragmentShaderId - フラグメントシェーダーのオブジェクトID
-----------------------------------------------------------------------------------*/
+*/
 function createProgram(gl, vertexShaderId, fragmentShaderId) {
     const programId = gl.createProgram();// 空のプログラムオブジェクトのID
 

@@ -6,7 +6,8 @@ if (!gl) {
   alert('WebGL 2がサポートされていません');
 }
 
-const programId = GetWaveEffectProgram();// 別エフェクトに切り替えたいならこの関数を変更する
+const programId = GetMyEffectProgram();// 別エフェクトに切り替えたいならこの関数を変更する
+
 const vaoID = gl.createVertexArray();// vaoを作成してそのIDを返す
 gl.bindVertexArray(vaoID);// 先ほど作成したvaoを操作対象にする
 
@@ -35,11 +36,12 @@ gl.useProgram(programId);// リンク済みのプログラムを実行可能な�
 
 const u_timeVarID = gl.getUniformLocation(programId, "u_time");// シェーダーでu_timeというuniform変数を使えるようにして設定用IDを取得
 const u_resolutionVarID = gl.getUniformLocation(programId, "u_resolution");// シェーダーでu_resolutionというuniform変数を使えるようにして設定用IDを取得
+const u_mouseposID = gl.getUniformLocation(programId, "u_mousepos");// シェーダーでu_mouseposというuniform変数を使えるようにして設定用IDを取得
 
-/* 
-  画面リサイズ時canvasのサイズも動的に変更する関数
-*/
-function resizeCanvas() {
+gl.uniform2f(u_mouseposID, 0.5, 0.5);
+
+// リサイズイベント
+window.addEventListener('resize', (e) => {
   const pixelRatio = window.devicePixelRatio || 1;
   const width = window.innerWidth * pixelRatio;
   const height = window.innerHeight * pixelRatio;
@@ -47,20 +49,29 @@ function resizeCanvas() {
   canvas.width = width;
   canvas.height = height;
 
-  // CSSサイズは画面サイズそのまま
   canvas.style.width = window.innerWidth + 'px';
   canvas.style.height = window.innerHeight + 'px';
 
+  // 描画サイズの変更とuniform変数の送信
   gl.viewport(0, 0, canvas.width, canvas.height);
   gl.uniform2f(u_resolutionVarID, canvas.width, canvas.height);
-}
+});
 
-window.addEventListener('resize', resizeCanvas);// 画面リサイズイベントにresizeCanvas関数を登録
-resizeCanvas(); // 初期化時に一度実行
+// マウスムーブイベント
+window.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
 
-/* 
-  毎フレーム呼ばれる関数
-*/
+  // 0.0 〜 1.0 に正規化
+  const mouseX = x / rect.width;
+  const mouseY = y / rect.height;
+
+  gl.uniform2f(u_mouseposID, mouseX, mouseY);
+});
+
+// ループ処理
 function loop(time) {
   /*
     [メモ]

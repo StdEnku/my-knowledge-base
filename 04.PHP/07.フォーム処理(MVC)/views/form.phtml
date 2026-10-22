@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <?php
+
+    ?>
+    <h1>form画面</h1>
+    <form action="index.php" method="GET">
+        <!-- ?path=resutlクエリを追加するためだけの要素 -->
+        <input type="hidden" name="path" value="result" />
+
+        <!-- ここから実際のフォーム部品 -->
+        <input type="text" name="sendText" />
+        <input type="submit" value="送信" />
+    </form>
+</body>
+
+</html>

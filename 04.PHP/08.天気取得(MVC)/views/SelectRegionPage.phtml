@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark">
+    <head>
+        <meta charset="UTF-8">
+        <title>SelectRetion</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        
+        <!--注意:なぜかスタイルシートにアクセスできないので直書き-->
+        <style>
+            .largeText {
+                font-size: 100px;
+                padding: 20px;
+            }
+
+            .middleText {
+                font-size: 60px;
+                padding:10px
+            }
+        </style>
+    </head>
+
+    <body>
+        <div>
+            <h1 class="largeText">天気予報取得</h1>
+        </div>
+        <div>
+            <form action="index.php" method="POST">
+                <input type="hidden" name="path" value="result" />
+
+                <select class="middleText" name="region">
+                    <option value="aichi">愛知</option>
+                    <option value="gifu">岐阜</option>
+                    <option value="tokyo">東京</option>
+                </select>
+
+                <input class="middleText" type="submit" value="送信する">
+            </form>
+        </div>
+    </body>
+</html>
